@@ -31,15 +31,17 @@ As shown in Figure 2 and Figure 3, we are attempting to implement an image recog
 
 ##### 3.1.1 User is Informed of Image to doodle
 
+The Figure 2 attached below is a visual depiction of the doodle recognizer application prompting the user to draw a doodle of a pizza. 
+
 ![Test2](https://github.com/meetdigrajkar/COMP_4102_PROJECT/blob/master/Images/pizzaInform.png)
 
-The Figure 2 attached below is a visual depiction of the doodle recognizer application prompting the user to draw a doodle of a pizza. 
 
 ##### 3.1.2 User drawn doodle.
 
+The Figure 3 attached below is a visual depiction of the user’s doodle of a pizza.
+
 ![Test3](https://github.com/meetdigrajkar/COMP_4102_PROJECT/blob/master/Images/pizzaDoodle.png)
 
-The Figure 3 attached below is a visual depiction of the user’s doodle of a pizza.
 
 ### 4.0 GOALS AND DELIVERABLES:
 
