@@ -1,6 +1,6 @@
 # DOODLE RECOGNIZER
 
-### GROUP MEMBERS:
+### DEVELOPERS:
 
 -	Shoaib Khan
 -	Meet Digrajkar
