@@ -20,6 +20,7 @@ For example, a user will be asked to draw a doodle of an apple. It will extract 
 ![Test](https://github.com/meetdigrajkar/COMP_4102_PROJECT/blob/master/Images/horseDoodles.png)
 
 #### Figure 1: Visual Representation of Horse Doodles 
+
 ### 3.0 THE CHALLENGE:
 The proposed problem in this project is challenging due to the concept of comparing various image data with the input image. OpenCV contains a specific function regarding this task, the 2D Discrete Fourier Transform (DFT). The Fourier Transform can be used in both the x and y direction to convert the images into a Frequency representation of the image.  A fast algorithm for the Fourier Transform is also available called Fast Fourier Transform (FFT). 
 
