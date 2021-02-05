@@ -67,4 +67,6 @@ Our future goals include expanding the number of categories, increasing the numb
 Note: The threshold value is to be determined through experiments throughout the development of the project.
 
 ### 5.1 SCHEDULE:
-
+![sch1](https://github.com/meetdigrajkar/Doodle-Recognizer/blob/master/Images/schedule_1.PNG)
+##### 
+![sch2](https://github.com/meetdigrajkar/Doodle-Recognizer/blob/master/Images/schedule_2.PNG)
