@@ -43,5 +43,28 @@ The Figure 3 attached below is a visual depiction of the user’s doodle of a pi
 
 
 ### 4.0 GOALS AND DELIVERABLES:
+4.1 Project Required Goals:
+We plan to create a Web application that allows a User to draw a doodle based on the category informed to the User by the application. The Web application will consist of a Flask application and a sample of 20 categories, each consisting of 20 images per category. 
+
+We will use OpenCV with python to implement the Fast Fourier Transform to convert the User’s drawn image to the frequency representation of the image. We will compare the User drawn image to the specific category from the 20 categories that the User was informed of.  It will identify the doodle drawn by the User only if the frequency representation of the image has a correlation factor higher than the threshold value with the compared images in the category. Also, in the identified category, the closest resembling image in the category to the User drawn image will be identified, via the highest correlation factor from the comparisons.
+To prove that our goal is achieved, we will provide a video of various test cases, in which a User will draw doodles from various categories. The application as a result, will provide the identified category of the drawn doodle (if it exists) and its closest resembling image in the category.
+
+4.1.1 An Example Use Case:
+1.	User is informed to draw a doodle of a Pizza.
+2.	Application converts doodle into a frequency representation of the image.
+3.	Application searches through the Pizza Category and performs the Correlation Factor calculation for every sample Pizza Image in the category
+4.	If the Correlation Factor is higher than threshold value, the doodle is identified as a Pizza.
+5.	The Application also identifies the closest resembling Pizza image via the highest CF.
+6.	If the CF is below the threshold value, the doodle is identified as Not Found.
+
+4.2 Future Project Goals (Optional): 
+Our future goals include expanding the number of categories, increasing the number of sample images per category, and adding the ability of identifying the specific doodle from every category if it does not match (have a correlation factor of higher than the threshold value) of the informed category. It should also identify the closest resembling image of the category that it was identified as.
+
+4.2.1 An Example Future Use Case (Continuing from Completion of Current Goals):
+1.	If the CF is below the threshold value, the other categories are searched until a CF of higher than the threshold value is found. The image closet resembling the doodle (highest CF) will be identified.
+2.	If no image from any category consists of a higher than the threshold CF value, the image is Not Found.
+
+Note: The threshold value is to be determined through experiments throughout the development of the project.
 
 ### 5.1 SCHEDULE:
+
