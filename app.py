@@ -1,15 +1,15 @@
-from flask import flash
+from flask import flash, render_template
 from flask.app import Flask
 
 app = Flask(__name__)
 
 @app.route("/")
-def index():
-    return "welcome"
+def home():
+    return render_template('index.html')
 
-@app.route("/hi/")
-def who():
-    return "who"
+@app.route("/test/")
+def test():
+    return render_template('test.html')
 
 @app.route("/hi/<username>")
 def greet(username):
