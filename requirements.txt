@@ -29,7 +29,7 @@ matplotlib==3.3.4
 mccabe==0.6.1
 multidict==5.1.0
 nano==0.10.0
-numpy==1.20.0
+numpy==1.19.0
 opencv-python==4.5.1.48
 parso==0.7.1
 Pillow==8.1.0
