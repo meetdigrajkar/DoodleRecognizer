@@ -47,7 +47,7 @@ python-language-server==0.36.2
 python-socketio==5.0.4
 requests==2.25.1
 rope==0.18.0
-scipy==1.6.0
+scipy==1.5.4
 six==1.15.0
 snowballstemmer==2.1.0
 toml==0.10.2
