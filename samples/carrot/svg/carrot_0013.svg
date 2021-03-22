@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created with ndjsontosvg(https:https://github.com/thompson318/ndjsontosvg) 
+	from the simplified Google quickdraw data set. key_id = 6243087191900160-->
+<svg width="256" height="256"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:ndjsontosvg="https://github.com/thompson318/ndjsontosvg"
+	xmlns:quickdraw="https://quickdraw.withgoogle.com/data"
+	xmlns:scikit-surgery="https://doi.org/10.1007/s11548-020-02180-5">
+
+	<rect width="100%" height="100%" fill="white" />
+	<path d = "M 162.00 14.00 L 120.00 75.00 L 89.00 114.00 L 59.00 137.00 L 0.00 191.00 L 52.00 181.00 L 73.00 174.00 L 209.00 113.00 L 212.00 89.00 L 206.00 72.00 L 184.00 54.00 L 150.00 34.00" stroke="black" fill="transparent"/>
+	<path d = "M 150.00 34.00 L 150.00 34.00" stroke="black" fill="transparent"/>
+	<path d = "M 172.00 87.00 L 201.00 103.00" stroke="black" fill="transparent"/>
+	<path d = "M 201.00 103.00 L 196.00 105.00" stroke="black" fill="transparent"/>
+	<path d = "M 139.00 91.00 L 147.00 109.00 L 169.00 128.00" stroke="black" fill="transparent"/>
+	<path d = "M 169.00 128.00 L 169.00 128.00" stroke="black" fill="transparent"/>
+	<path d = "M 113.00 105.00 L 115.00 117.00 L 137.00 136.00" stroke="black" fill="transparent"/>
+	<path d = "M 88.00 120.00 L 87.00 141.00 L 98.00 154.00" stroke="black" fill="transparent"/>
+	<path d = "M 57.00 143.00 L 65.00 157.00" stroke="black" fill="transparent"/>
+	<path d = "M 65.00 157.00 L 69.00 166.00" stroke="black" fill="transparent"/>
+	<path d = "M 69.00 167.00 L 70.00 168.00" stroke="black" fill="transparent"/>
+	<path d = "M 189.00 48.00 L 195.00 29.00 L 196.00 1.00" stroke="black" fill="transparent"/>
+	<path d = "M 196.00 0.00 L 196.00 0.00" stroke="black" fill="transparent"/>
+	<path d = "M 192.00 63.00 L 220.00 23.00 L 242.00 6.00" stroke="black" fill="transparent"/>
+	<path d = "M 194.00 66.00 L 221.00 56.00 L 231.00 56.00 L 241.00 65.00 L 241.00 69.00 L 237.00 71.00" stroke="black" fill="transparent"/>
+	<path d = "M 185.00 59.00 L 188.00 21.00 L 182.00 9.00 L 175.00 4.00" stroke="black" fill="transparent"/>
+	<path d = "M 196.00 59.00 L 227.00 42.00 L 255.00 32.00" stroke="black" fill="transparent"/>
+	<path d = "M 255.00 32.00 L 255.00 32.00" stroke="black" fill="transparent"/>
+</svg>

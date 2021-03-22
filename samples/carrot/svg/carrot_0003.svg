@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created with ndjsontosvg(https:https://github.com/thompson318/ndjsontosvg) 
+	from the simplified Google quickdraw data set. key_id = 6009710111096832-->
+<svg width="256" height="256"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:ndjsontosvg="https://github.com/thompson318/ndjsontosvg"
+	xmlns:quickdraw="https://quickdraw.withgoogle.com/data"
+	xmlns:scikit-surgery="https://doi.org/10.1007/s11548-020-02180-5">
+
+	<rect width="100%" height="100%" fill="white" />
+	<path d = "M 13.00 247.00 L 20.00 224.00 L 33.00 197.00 L 64.00 151.00 L 112.00 95.00 L 135.00 75.00 L 156.00 63.00 L 171.00 61.00 L 174.00 68.00 L 170.00 82.00 L 156.00 111.00 L 112.00 183.00 L 73.00 217.00 L 27.00 237.00 L 1.00 255.00 L 0.00 253.00" stroke="black" fill="transparent"/>
+	<path d = "M 173.00 57.00 L 171.00 54.00 L 190.00 25.00 L 195.00 11.00" stroke="black" fill="transparent"/>
+	<path d = "M 180.00 73.00 L 192.00 60.00 L 218.00 42.00" stroke="black" fill="transparent"/>
+	<path d = "M 177.00 74.00 L 184.00 69.00 L 234.00 58.00" stroke="black" fill="transparent"/>
+	<path d = "M 179.00 61.00 L 180.00 56.00 L 209.00 30.00" stroke="black" fill="transparent"/>
+	<path d = "M 171.00 60.00 L 170.00 50.00 L 185.00 0.00" stroke="black" fill="transparent"/>
+	<path d = "M 49.00 187.00 L 67.00 193.00" stroke="black" fill="transparent"/>
+	<path d = "M 83.00 158.00 L 95.00 165.00" stroke="black" fill="transparent"/>
+	<path d = "M 119.00 114.00 L 126.00 120.00" stroke="black" fill="transparent"/>
+	<path d = "M 138.00 90.00 L 141.00 96.00" stroke="black" fill="transparent"/>
+	<path d = "M 30.00 213.00 L 47.00 218.00" stroke="black" fill="transparent"/>
+	<path d = "M 73.00 197.00 L 82.00 203.00" stroke="black" fill="transparent"/>
+	<path d = "M 105.00 146.00 L 112.00 152.00" stroke="black" fill="transparent"/>
+</svg>

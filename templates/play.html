@@ -1,29 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Doodle Recognizer</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Doodle Recognizer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
+  </head>
+  <body>
+    <section class="section">
+      <div class="box">
+        <h1 class="title">
+          Doodle Recognizer
+        </h1>
+        <p class="subtitle has-text-link">
+          {{doodle_type}}!
+        </p>
 
-<link rel="stylesheet" href="{{ url_for('static',    filename='css/template.css') }}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-</head>
-<body>
-  <section class="section">
-    <div class="box">
-      <h1 class="title">
-        Doodle Recognizer
-      </h1>
-      <p class="subtitle">
-        Draw the Doodle!
-      </p>
+        <div class="right-block">
+          <canvas id="paint-canvas" width="640" height="400"></canvas>
+          <button class="button is-link is-medium" type="button" id="recognize">
+            Recognize
+          </button>
+        </div>
+        <br />
+        <div class="left-block">
+          <div class="colors">
+            <button
+              class="button is-danger is-small"
+              type="button"
+              value="#de2a2a"
+            ></button>
+            <button
+              class="button is-success is-small"
+              type="button"
+              value="#32a852"
+            ></button>
 
-      <strong><nav>
-        <ul class="menu">
-          <li><a href="{{ url_for('home') }}">Home</a></li>
-        </ul>
-      </nav></strong>
-    </div>
-  </section>
-</body>
+            <button
+              class="button is-link is-small"
+              type="button"
+              value="#0000ff"
+            ></button>
+          </div>
+          <br />
+          <div class="brushes">
+            <button class="button is-small" type="button" value="1">1</button>
+            <button class="button is-small" type="button" value="2">2</button>
+            <button class="button is-small" type="button" value="3">3</button>
+            <button class="button is-small" type="button" value="4">4</button>
+            <button class="button is-small" type="button" value="5">5</button>
+          </div>
+          <br />
+          <div class="buttons">
+            <button class="button is-danger is-medium" id="clear" type="button">
+              Clear
+            </button>
+            <button class="button is-primary is-medium" id="save" type="button">
+              Save
+            </button>
+          </div>
+        </div>
+
+        <br />
+
+        <strong
+          ><nav>
+            <ul class="menu">
+              <li><a href="{{ url_for('home') }}">Home</a></li>
+            </ul>
+          </nav>
+        </strong>
+      </div>
+    </section>
+    <script src="{{ url_for('static', filename='canvas.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  </body>
 </html>
