@@ -13,6 +13,44 @@
     />
   </head>
   <body>
+    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="{{ url_for('home') }}">
+          <img src="/static/images/logo.png" width="32" height="32" />
+        </a>
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a href="{{ url_for('play') }}" class="navbar-item">
+            Draw
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <a href="{{ url_for('about') }}" class="navbar-item">
+                About
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
     <section class="section">
       <div class="box has-background-black-ter">
         <h1 class="title is-1 has-text-info">

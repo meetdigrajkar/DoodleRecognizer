@@ -15,121 +15,68 @@
     />
   </head>
   <body>
-    <section class="hero has-background-black-ter is-halfheight">
-      <div class="hero-body">
-        <div class="">
-          <figure class="image">
-            <img src="/static/images/bg.jpg" />
-          </figure>
-          <br />
-          <p class="title is-1 has-text-info">Doodle Recognizer</p>
-          <p class="subtitle has-text-primary-light">
-            Image recognition and identification!
-          </p>
+    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="{{ url_for('home') }}">
+          <img src="/static/images/logo.png" width="32" height="32" />
+        </a>
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a href="{{ url_for('draw') }}" class="navbar-item">
+            Draw
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <a href="{{ url_for('about') }}" class="navbar-item">
+                About
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+    </nav>
+    <div class="box box has-background-black-ter">
+      <p class="title is-1 has-text-info">Doodle Recognizer</p>
+      <p class="subtitle has-text-primary-light">
+        Image recognition and identification!
+      </p>
+    </div>
 
     <section class="section">
       <div class="box has-background-black-ter">
-        <p class="subtitle is-4 pt-2 has-text-warning">
-          The Developers.
-        </p>
-
-        <div class="card">
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="image is-48x48">
-                  <img
-                    class="is-rounded"
-                    src="/static/images/meet_bio.PNG"
-                    alt="Placeholder"
-                  />
-                </figure>
-              </div>
-              <div class="media-content">
-                <p class="title is-4">Meet Digrajkar</p>
-                <p class="subtitle is-6">Software Engineer</p>
-              </div>
-            </div>
-
-            <div class="content">
-              Code Monkey
-              <a href="https://github.com/meetdigrajkar/">@github</a>
-              <a href="https://www.linkedin.com/in/meet-digrajkar-054086176/"
-                >@linkedin</a
-              >
-              <br />
-            </div>
-          </div>
+        <div class="content is-normal has-text-primary-light">
+          <h2 class="has-text-danger">Our system</h2>
+          <p>
+            Draw a doodle from a category and we will identify parts of it, and
+            give you data on which category your doodle was from! The categories
+            below are what we support at this moment.
+          </p>
+          <ul class="has-text-warning">
+            <li>Apple</li>
+            <li>Tower</li>
+            <li>Pants</li>
+            <li>Ice cream</li>
+            <li>Keys</li>
+          </ul>
         </div>
-
-        <br />
-
-        <div class="card">
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="image is-48x48">
-                  <img
-                    class="is-rounded"
-                    src="https://bulma.io/images/placeholders/96x96.png"
-                    alt="Placeholder image"
-                  />
-                </figure>
-              </div>
-              <div class="media-content">
-                <p class="title is-4">Shoaib Khan</p>
-                <p class="subtitle is-6">Software Engineer</p>
-              </div>
-            </div>
-
-            <div class="content">
-              bio here <a href="#">@github</a>
-              <a href="#">@linkedin</a>
-              <br />
-            </div>
-          </div>
-        </div>
-
-        <br />
-
-        <div class="card">
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="image is-48x48">
-                  <img
-                    class="is-rounded"
-                    src="https://bulma.io/images/placeholders/96x96.png"
-                    alt="Placeholder image"
-                  />
-                </figure>
-              </div>
-              <div class="media-content">
-                <p class="title is-4">Tamer Ibrahim</p>
-                <p class="subtitle is-6">Software Engineer</p>
-              </div>
-            </div>
-
-            <div class="content">
-              bio here <a href="#">@github</a>
-              <a href="#">@linkedin</a>
-              <br />
-            </div>
-          </div>
-        </div>
-
-        <br />
-
-        <strong
-          ><nav>
-            <ul class="menu">
-              <li><a href="{{ url_for('about') }}">About</a></li>
-            </ul>
-          </nav></strong
-        >
       </div>
     </section>
   </body>
