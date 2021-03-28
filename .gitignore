@@ -4,5 +4,8 @@ env
 # Ingore IDE specific files
 .vscode/
 
+# Ingore flask session files
+.flask_session
+
 # Ignore __pycache__
 __pycache__
