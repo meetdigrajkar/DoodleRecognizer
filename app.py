@@ -49,6 +49,10 @@ def draw():
 @cross_origin()
 def doodle():
 
+    # clear data folders
+    clearFolder("./save")
+    clearFolder("./doodles")
+
     response = request.get_json()
     img_uri = response['imgBase64']
 
