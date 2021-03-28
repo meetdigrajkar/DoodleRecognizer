@@ -2,7 +2,6 @@ from flask import render_template, request, session
 from flask_cors import CORS, cross_origin
 from flask.app import Flask
 import random
-from flask_session import Session
 from collections import Counter
 from flask import jsonify, json
 from recognize import *
@@ -15,7 +14,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 # Check Configuration section for more details
 SESSION_TYPE = 'filesystem'
 app.config.from_object(__name__)
-Session(app)
 
 addr = 'http://localhost:3000'
 doodle_url = addr + '/api/doodle'
