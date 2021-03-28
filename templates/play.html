@@ -13,6 +13,20 @@
       rel="shortcut icon"
       href="{{ url_for('static', filename='favicon.ico') }}"
     />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js"
+      integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='canvas.js') }}"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='graph.js') }}"
+    ></script>
   </head>
   <body>
     <nav class="navbar is-info" role="navigation" aria-label="main navigation">
@@ -109,8 +123,10 @@
 
         <br />
       </div>
+
+      <div class="box">
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
     </section>
-    <script src="{{ url_for('static', filename='canvas.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   </body>
 </html>

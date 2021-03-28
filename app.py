@@ -14,6 +14,9 @@ from skimage.metrics import structural_similarity
 from skimage.transform import resize
 import os, shutil
 import operator
+from collections import Counter
+from itertools import chain
+from flask import jsonify,json
 
 app = Flask(__name__,static_url_path='/static')
 # Check Configuration section for more details
@@ -28,9 +31,9 @@ doodle_url = addr + '/api/doodle'
 content_type = 'image/jpeg'
 headers = {'content-type': content_type}
 
-doodle_types = ["Apple", "Carrot", "Ice-cream", "Key", "Pants", "Tower"]
-
-max_range = 9
+doodle_types = ["Apple", "Airplane", "Anvil", "Icecream"]
+max_range = 99
+gridSize = 6
 
 @app.route("/")
 def home():
@@ -63,20 +66,14 @@ def doodle():
 
     #calculate matches based on doodle type
     crop = cropImg(img)
-    split_imgs = splitImg(crop,3)
-    calculateMatches(split_imgs)
+    split_imgs = splitImg(crop,gridSize)
+    tile_types,occurences = calculateMatches(split_imgs)
 
-    # build a response dict to send back to client
-    response = {'message': 'image received. size={}x{}'.format(img.shape[1], img.shape[0])
-                }
-    # encode response using jsonpickle
-    response_pickled = jsonpickle.encode(response)
+    occ_list = Counter(occurences)
+    print(occ_list)
 
-    return Response(response=response_pickled, status=200, mimetype="application/json")
+    return jsonify(json.dumps(occ_list))
 
-def structural_sim(img1, img2):
-    sim, diff = structural_similarity(img1, img2, full = True)
-    return sim
 
 def readb64(uri):
     encoded_data = uri.split(',')[1]
@@ -104,46 +101,90 @@ def calculateMatches(split_imgs):
     #get the average correlation value for each class for that cell
     #save the highest correlation value out of all the classes and determine the class for that cell
     img_dict = getImages()
-    icecreamSumCorr, appleSumCorr, carrotSumCorr, keySumCorr, towerSumCorr, pantsSumCorr = 0,0,0,0,0,0
 
     avg_corr_dict = dict()
     tile_type_dict = dict()
+    max_size_dict = dict()
+
     tileCount = 1
+    threshold = 0.001
+    occurences = []
 
     for tile in split_imgs:
+        icecreamSumCorr, appleSumCorr, carrotSumCorr, keySumCorr, towerSumCorr, pantsSumCorr, bookSumCorr, airplaneSumCorr, anvilSumCorr, bananaSumCorr = 0,0,0,0,0,0,0,0,0,0
         avg_corr_dict.clear()
+
+        #init max size dict for all samples
+        max_size_dict.update({"icecream" : max_range})
+        max_size_dict.update({"apple" : max_range})
+        max_size_dict.update({"airplane" : max_range})
+        max_size_dict.update({"anvil" : max_range})
+
         for type in img_dict:
+            #reset discard correlation
+            discard_correlation = False
+
+            #template match the tile with the sample image
             res = cv2.matchTemplate(tile,img_dict.get(type),cv2.TM_CCOEFF_NORMED)
             min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
 
-            if(type == "icecream"):
-                icecreamSumCorr += max_val
-            elif(type == "apple"):
-                appleSumCorr += max_val
-            elif(type == "carrot"):
-                carrotSumCorr += max_val
-            elif(type == "key"):
-                keySumCorr += max_val
-            elif(type == "pants"):
-                pantsSumCorr += max_val
-            elif(type == "tower"):
-                towerSumCorr += max_val
+            #check if the correlation is above the threshold
+            if(max_val <= threshold):
+                discard_correlation = True
 
+            if(type == "icecream"):
+                if(discard_correlation):
+                    old_max = max_size_dict.get("icecream")
+                    max_size_dict.update({"icecream" : old_max - 1})
+                else:
+                    icecreamSumCorr += max_val
+            elif(type == "apple"):
+                if(discard_correlation):
+                    old_max = max_size_dict.get("apple")
+                    max_size_dict.update({"apple" : old_max - 1})
+                else:
+                    appleSumCorr += max_val
+            elif(type == "airplane"):
+                if(discard_correlation):
+                    old_max = max_size_dict.get("airplane")
+                    max_size_dict.update({"airplane" : old_max - 1})
+                else:
+                    airplaneSumCorr += max_val
+            elif(type == "anvil"):
+                if(discard_correlation):
+                    old_max = max_size_dict.get("anvil")
+                    max_size_dict.update({"anvil" : old_max - 1})
+                else:
+                    anvilSumCorr += max_val
         #calculate average correlation
-        avg_corr_dict.update({"icecream" : icecreamSumCorr/max_range})
-        avg_corr_dict.update({"apple" : appleSumCorr/max_range})
-        avg_corr_dict.update({"carrot" : carrotSumCorr/max_range})
-        avg_corr_dict.update({"key" : keySumCorr/max_range})
-        avg_corr_dict.update({"pants" : pantsSumCorr/max_range})
-        avg_corr_dict.update({"tower" : towerSumCorr/max_range})
+        avg_corr_dict.update({"icecream" : icecreamSumCorr/max_size_dict.get("icecream")})
+        avg_corr_dict.update({"apple" : appleSumCorr/max_size_dict.get("apple")})
+        avg_corr_dict.update({"airplane" : airplaneSumCorr/max_size_dict.get("airplane")})
+        avg_corr_dict.update({"anvil" : anvilSumCorr/max_size_dict.get("anvil")})
+
+        #print the average corrlation values for each class on this tile
+        print("\n " + str(avg_corr_dict))
 
         #caluclate the max avg corrlation among classes
-        max_key = max(avg_corr_dict.items(), key=operator.itemgetter(1))[0]
-        tile_type_dict.update({tileCount : max_key})
-        tileCount = tileCount + 1
+        max_value = max(avg_corr_dict.values())
+        max_keys = [k for k, v in avg_corr_dict.items() if v == max_value]
 
-    print(tile_type_dict)
-    return tile_type_dict
+        for i in max_keys:
+            occurences.append(i)
+
+        print("Tile # " + str(tileCount) + " is identified as" + str(max_keys) + " with a average corrlation value: " + str(max_value))
+        tile_type_dict.update({tileCount : max_keys})
+
+        tileCount += 1
+
+    print("\n" + str(tile_type_dict))
+
+    print("\n We think you drew a ..." + str(di(tile_type_dict)))
+    return tile_type_dict,occurences
+
+def di(d):
+    counts = Counter(chain.from_iterable([v] if isinstance(v, str) else v for v in d.values()))
+    return counts.most_common(1)[0]
 
 def cropImg(img):
     original = img.copy()
@@ -222,27 +263,19 @@ def getImages():
     imgs = dict()
 
     for i in range(max_range):
-        tempImg = cv2.imread("samples/icecream/png/icecream_000" + str(i) + ".png",0)
+        tempImg = cv2.imread("samples/icecream/png/icecream" + str(i) + ".png",0)
         imgs.update({"icecream": tempImg})
 
     for i in range(max_range):
-        tempImg = cv2.imread("samples/apple/png/apple_000" + str(i) + ".png",0)
+        tempImg = cv2.imread("samples/apple/png/apple" + str(i) + ".png",0)
         imgs.update({"apple": tempImg})
 
     for i in range(max_range):
-        tempImg = cv2.imread("samples/carrot/png/carrot_000" + str(i) + ".png",0)
-        imgs.update({"carrot": tempImg})
+        tempImg = cv2.imread("samples/anvil/png/anvil" + str(i) + ".png",0)
+        imgs.update({"anvil": tempImg})
 
     for i in range(max_range):
-        tempImg =cv2.imread("samples/key/png/key_000" + str(i) + ".png",0)
-        imgs.update({"key": tempImg})
-
-    for i in range(max_range):
-        tempImg = cv2.imread("samples/pants/png/pants_000" + str(i) + ".png",0)
-        imgs.update({"pants": tempImg})
-
-    for i in range(max_range):
-        tempImg = cv2.imread("samples/tower/png/tower_000" + str(i) + ".png",0)
-        imgs.update({"tower": tempImg})
+        tempImg = cv2.imread("samples/airplane/png/airplane" + str(i) + ".png",0)
+        imgs.update({"airplane": tempImg})
 
     return imgs

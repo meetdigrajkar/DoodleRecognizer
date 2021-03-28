@@ -1,4 +1,6 @@
 window.onload = function () {
+  localStorage.clear();
+
   // Definitions
   var canvas = document.getElementById("paint-canvas");
   var context = canvas.getContext("2d");
@@ -89,12 +91,34 @@ window.onload = function () {
       data: {
         imgBase64: canvasDataURL,
       },
-    }).done(function (o) {
-      console.log("saved");
-      // If you want the file to be visible in the browser
-      // - please modify the callback in javascript. All you
-      // need is to return the url to the file, you just saved
-      // and than put the image in your browser.
-    });
+      success: function (data) {
+        var result = JSON.parse(data);
+        console.log(result);
+
+        var appleCount = 0;
+        var icecreamCount = 0;
+        var anvilCount = 0;
+        var airplaneCount = 0;
+
+        for (var key in result) {
+          console.log(key, result[key]);
+
+          if (key == "apple") {
+            appleCount = result[key];
+          } else if ((key = "icecream")) {
+            icecreamCount = result[key];
+          } else if ((key = "airplane")) {
+            airplaneCount = result[key];
+          } else if ((key = "anvil")) {
+            anvilCount = result[key];
+          }
+        }
+
+        localStorage.setItem("apple", appleCount);
+        localStorage.setItem("icecream", icecreamCount);
+        localStorage.setItem("airplane", airplaneCount);
+        localStorage.setItem("anvil", anvilCount);
+      },
+    }).done(function (o) {});
   });
 };
