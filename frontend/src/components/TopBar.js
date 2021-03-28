@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  Toolbar,
-  Typography,
-  AppBar,
-  Button,
-  IconButton,
-  Icon,
-} from "@material-ui/core";
+import { Toolbar, AppBar, IconButton, Icon } from "@material-ui/core";
 import RedirectButton from "./RedirectButton";
+import RedirectIconButton from "./RedirectIconButton";
 
 class TopBar extends React.Component {
   constructor(props) {
@@ -22,15 +16,9 @@ class TopBar extends React.Component {
       <div style={{ flexGrow: 1 }}>
         <AppBar position="static" style={{ background: "lightblue" }}>
           <Toolbar style={{ background: "#3298dc" }}>
-            <IconButton>
-              <Icon style={{ fontSize: 30 }}>
-                <img alt="edit" src="favicon.ico" />
-              </Icon>
-            </IconButton>
+            <RedirectIconButton url="/home" icon="favicon.ico" />
             <RedirectButton url="/draw" text="Draw" />
             <RedirectButton url="/about" text="About" />
-            {/* <Button color="inherit">Draw</Button>
-            <Button color="inherit">About</Button> */}
           </Toolbar>
         </AppBar>
       </div>
