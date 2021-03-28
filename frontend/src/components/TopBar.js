@@ -7,30 +7,15 @@ import {
   IconButton,
   Icon,
 } from "@material-ui/core";
+import RedirectButton from "./RedirectButton";
 
 class TopBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // openDropdown: false,
-      // anchorEl: null,
-      // redirectToSignIn: false,
-    };
-
-    // this.openMenu = this.openMenu.bind(this);
-    // this.closeMenu = this.closeMenu.bind(this);
-    // this.signOut = this.signOut.bind(this);
+    this.state = {};
   }
 
   componentDidMount() {}
-
-  // openMenu(event) {
-  //   this.setState({ openDropdown: true, anchorEl: event.currentTarget });
-  // }
-
-  // closeMenu() {
-  //   this.setState({ openDropdown: false });
-  // }
 
   render() {
     return (
@@ -42,8 +27,10 @@ class TopBar extends React.Component {
                 <img alt="edit" src="favicon.ico" />
               </Icon>
             </IconButton>
-            <Button color="inherit">Draw</Button>
-            <Button color="inherit">About</Button>
+            <RedirectButton url="/draw" text="Draw" />
+            <RedirectButton url="/about" text="About" />
+            {/* <Button color="inherit">Draw</Button>
+            <Button color="inherit">About</Button> */}
           </Toolbar>
         </AppBar>
       </div>
