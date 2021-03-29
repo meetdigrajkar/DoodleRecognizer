@@ -26,10 +26,6 @@ def index():
 @app.route("/api/doodle/", methods=["POST"])
 @cross_origin()
 def doodle():
-    # clear data folders
-    clearFolder("./save")
-    clearFolder("./doodles")
-
     response = request.get_json()
 
     img_uri = response['imgBase64']
@@ -49,6 +45,11 @@ def doodle():
         for i in sorted (occ_list.keys()) :
             #print(i + " : " + str(occ_list.get(i)))
             similarity_vals.append(occ_list.get(i))
+
+        # clear data folders
+        clearFolder("./save")
+        clearFolder("./doodles")
+        
         return json.dumps(str(similarity_vals))
     else:
         return json.dumps(str(Conv_Recognize(crop)))

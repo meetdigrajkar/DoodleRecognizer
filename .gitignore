@@ -10,14 +10,9 @@ env
 # Ignore all files in __pycache__
 __pycache__/
 
-# Ignore all files in save
-save/
 
 Lib/
 
 Scripts/
 
 pyvenv.cfg
-
-# Ignore all files in doodles
-doodles/
