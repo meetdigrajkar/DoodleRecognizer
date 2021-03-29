@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 import "../styles/style.css";
+import { CATEGORY_LIST } from "./Categories";
 
 class Home extends React.Component {
   render() {
@@ -29,10 +30,9 @@ class Home extends React.Component {
                 categories below are what we support at this moment.
               </p>
               <ul className="has-text-warning">
-                <li>Airplane</li>
-                <li>Anvil</li>
-                <li>Apple</li>
-                <li>Ice cream</li>
+                {CATEGORY_LIST.map((category) => (
+                  <li key={category}> {category}</li>
+                ))}
               </ul>
             </div>
           </div>

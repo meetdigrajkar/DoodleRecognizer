@@ -1,5 +1,5 @@
 import React from "react";
-import { Toolbar, AppBar, IconButton, Icon } from "@material-ui/core";
+import { Toolbar, AppBar } from "@material-ui/core";
 import RedirectButton from "./RedirectButton";
 import RedirectIconButton from "./RedirectIconButton";
 

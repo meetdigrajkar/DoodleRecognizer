@@ -1,17 +1,14 @@
 import {
   Button,
   Grid,
-  Switch,
   FormHelperText,
   NativeSelect,
-  InputLabel,
   FormControl,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useCanvas } from "./CanvasContext";
 import axios from "axios";
 import Graph from "./Graph";
-import { withStyles } from "@material-ui/core/styles";
 
 export function Canvas() {
   const {
@@ -25,7 +22,7 @@ export function Canvas() {
   } = useCanvas();
 
   const [graphData, setGraphData] = useState([]);
-  const [algorithm, setAlgorithm] = useState(1);
+  const [algorithm, setAlgorithm] = useState("1");
 
   useEffect(() => {
     prepareCanvas();
@@ -153,7 +150,7 @@ export function Canvas() {
               height: "50vh",
             }}
           >
-            <Graph data={graphData}></Graph>
+            <Graph data={graphData} algorithm={algorithm}></Graph>
           </div>
         </Grid>
       </Grid>
