@@ -1,4 +1,4 @@
-# The file containing environment variables 
+# The file containing environment variables
 env
 
 # Ingore IDE specific files
@@ -12,6 +12,12 @@ __pycache__/
 
 # Ignore all files in save
 save/
+
+Lib/
+
+Scripts/
+
+pyvenv.cfg
 
 # Ignore all files in doodles
 doodles/

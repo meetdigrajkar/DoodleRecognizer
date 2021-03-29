@@ -8,58 +8,44 @@ from nets.conv import conv
 from random import randint
 
 # define some constants
-N_FRUITS = 4
-FRUITS = {0: "apple", 1: "airplane", 2: "anvil", 3: "icecream"}
+N_ANIMALS = 10
+ANIMALS = {0: "bear", 1: "bee", 2: "bird", 3: "cat.npy", 4: "cow",5: "crocodile",6: "dog",7: "elephant",8: "giraffee",9: "horse"}
 
 # number of samples to take in each class
-N = 1000
+N = 10000
 
 # some other constants
-N_EPOCHS = 20
+N_EPOCHS = 40
 
 # data files in the same order as defined in FRUITS
-files = ["apple.npy", "airplane.npy", "anvil.npy", "icecream.npy"]
+files = ["bear.npy", "bee.npy","bird.npy", "cat.npy", "cow.npy","crocodile.npy","dog.npy","elephant.npy","giraffee.npy","horse.npy"]
 
 # images need to be 28x28 for training with a ConvNet
-fruits = load("data/", files, reshaped=True)
-
-# images need to be flattened for training with an MLP
-# fruits = load("data/", files, reshaped=False)
-
+animals_load_data = load("data/", files, reshaped=True)
 
 # limit no of samples in each class to N
-fruits = set_limit(fruits, N)
+animals_limit = set_limit(animals_load_data, N)
 
-# normalize the values
-fruits = map(normalize, fruits)
+animals_map = normalize(animals_limit)
 
 # define the labels
-labels = make_labels(N_FRUITS, N)
+labels_f = make_labels(N_ANIMALS, N)
 
 # prepare the data
-x_train, x_test, y_train, y_test = tts(fruits, labels, test_size=0.05)
+x_train, x_test, y_train, y_test = tts(animals_map, labels_f, test_size=0.05)
 
 # one hot encoding
-Y_train = np_utils.to_categorical(y_train, N_FRUITS)
-Y_test = np_utils.to_categorical(y_test, N_FRUITS)
+Y_train = np_utils.to_categorical(y_train, N_ANIMALS)
+Y_test = np_utils.to_categorical(y_test, N_ANIMALS)
 
 # use our custom designed ConvNet model
-model = conv(classes=N_FRUITS, input_shape=(28, 28, 1))
-
-# use our custom designed MLP model
-# model = mlp(classes=N_FRUITS)
-
+model = conv(classes=N_ANIMALS, input_shape=(28, 28, 1))
 
 model.compile(loss='categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
-raw_input("Type 'train' to start training: ")
-#print "Training commenced"
-
 model.fit(np.array(x_train), np.array(Y_train), batch_size=32, epochs=N_EPOCHS, verbose=1)
-
-#print "Training complete"
 
 #print "Evaluating model"
 preds = model.predict(np.array(x_test))
@@ -69,22 +55,20 @@ for i in range(len(preds)):
     if np.argmax(preds[i]) == y_test[i]:
         score += 1
 
-#print "Accuracy: ", ((score + 0.0) / len(preds)) * 100
+print ("Accuracy: ", ((score + 0.0) / len(preds)) * 100)
 
-name = raw_input(">Enter name to save trained model: ")
+name = input(">Enter name to save trained model: ")
 model.save(name + ".h5")
-#print "Model saved"
-
+print ("Model saved")
 
 def visualize_and_predict():
-    "selects a random test case and shows the object, the prediction and the expected result"
+    #"selects a random test case and shows the object, the prediction and the expected result"
     n = randint(0, len(x_test))
     visualize(denormalize(np.reshape(x_test[n], (28, 28))))
-    pred = FRUITS[np.argmax(model.predict(np.array([x_test[n]])))]
-    actual = FRUITS[y_test[n]]
-    #print "Actual:", actual
-    #print "Predicted:", pred
-
+    pred = ANIMALS[np.argmax(model.predict(np.array([x_test[n]])))]
+    actual = ANIMALS[y_test[n]]
+    print ("Actual:", actual)
+    print ("Predicted:", pred)
 
 #print "Testing mode"
 visualize_and_predict()

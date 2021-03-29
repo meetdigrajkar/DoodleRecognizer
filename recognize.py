@@ -112,7 +112,7 @@ def calculateMatches(split_imgs):
 SAMPLES = {0: "airplane", 1: "anvil", 2: "apple", 3: "icecream"}
 
 def Conv_Recognize(img):
-    conv = load_model("./models/conv_97.h5")
+    conv = load_model("./models/conv_79.h5")
 
     # resize input image to 28x28
     x = imresize(img, (28, 28))
