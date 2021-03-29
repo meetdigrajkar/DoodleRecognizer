@@ -54,12 +54,12 @@ def doodle():
         clearFolder("./doodles")
 
         res = str(similarity_vals)
-        print('OpenCV Response: ' + res)
+        print('OpenCV Patch-Based Template Matching Response: ' + res)
         return json.dumps(res)
 
     else:
         res = str(Conv_Recognize(crop))
-        print('Neural Network Response: ' + res)
+        print('Neural Network Convolution Response: ' + res)
         return json.dumps(res)
 
 
