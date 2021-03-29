@@ -6,7 +6,7 @@ from collections import Counter
 from flask import jsonify, json
 from recognize import *
 
-app = Flask(__name__,static_folder='./frontend/build',static_url_path='/')
+app = Flask(__name__, static_folder='./frontend/build', static_url_path='/')
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -19,9 +19,16 @@ app.config.from_object(__name__)
 content_type = 'image/jpeg'
 headers = {'content-type': content_type}
 
+
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
+
+
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
+
 
 @app.route("/api/doodle/", methods=["POST"])
 @cross_origin()
@@ -42,17 +49,18 @@ def doodle():
         tile_types, occurences = calculateMatches(split_imgs)
         occ_list = Counter(occurences)
         print(dict(occ_list))
-        for i in sorted (occ_list.keys()) :
+        for i in sorted(occ_list.keys()):
             #print(i + " : " + str(occ_list.get(i)))
             similarity_vals.append(occ_list.get(i))
 
         # clear data folders
         clearFolder("./save")
         clearFolder("./doodles")
-        
+
         return json.dumps(str(similarity_vals))
     else:
         return json.dumps(str(Conv_Recognize(crop)))
+
 
 if __name__ == 'main':
     app.run(host='0.0.0.0')
