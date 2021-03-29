@@ -53,26 +53,24 @@ def doodle():
     clearFolder("./doodles")
 
     similarity_vals = []
-
     response = request.get_json()
-    img_uri = response['imgBase64']
-    algorithm = responnse['algorithm']
 
+    img_uri = response['imgBase64']
+    algorithm = response['algorithm']
     print(algorithm)
 
     img = readb64(img_uri)
-
-    # calculate matches based on doodle type
     crop = cropImg(img)
 
-    print("gitkraken is op as hell")
-
-    #based on the algorithm type (1 : opencv, 2: neural network convolution)
     if(algorithm == 1):
         split_imgs = splitImg(crop, gridSize)
         tile_types, occurences = calculateMatches(split_imgs)
         occ_list = Counter(occurences)
-        print(occ_list)
+        #print(dict(occ_list))
+
+        for i in sorted (occ_list.keys()) :
+            #print(i + " : " + str(occ_list.get(i)))
+            similarity_vals.append(occ_list.get(i))
     else:
         similarity_vals = Conv_Recognize(crop)
 

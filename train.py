@@ -9,7 +9,7 @@ from random import randint
 
 # define some constants
 N_ANIMALS = 10
-ANIMALS = {0: "bear", 1: "bee", 2: "bird", 3: "cat.npy", 4: "cow",5: "crocodile",6: "dog",7: "elephant",8: "giraffee",9: "horse"}
+ANIMALS = {0: "bear", 1: "bee", 2: "bird", 3: "cat", 4: "cow",5: "crocodile",6: "dog",7: "elephant",8: "giraffee",9: "horse"}
 
 # number of samples to take in each class
 N = 10000
@@ -17,7 +17,7 @@ N = 10000
 # some other constants
 N_EPOCHS = 40
 
-# data files in the same order as defined in FRUITS
+# data files in the same order as defined in ANIMALS
 files = ["bear.npy", "bee.npy","bird.npy", "cat.npy", "cow.npy","crocodile.npy","dog.npy","elephant.npy","giraffee.npy","horse.npy"]
 
 # images need to be 28x28 for training with a ConvNet

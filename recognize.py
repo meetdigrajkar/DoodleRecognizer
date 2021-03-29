@@ -6,14 +6,13 @@ import shutil
 from collections import Counter
 from itertools import chain
 from prepare_data import normalize
-from scipy.misc import imresize
-from keras.models import load_model
+from scipy.misc import imsave, imread, imresize
+from tensorflow.keras.models import load_model
 import json
 
-doodle_types = ["Apple", "Airplane", "Anvil", "Icecream"]
 max_range = 99
 gridSize = 6
-
+ANIMALS = ["bear", "bee", "bird", "cat", "cow","crocodile","dog","elephant","giraffee","horse"]
 
 def calculateMatches(split_imgs):
     # get all the samples in all the classes in a hash map ("apple", apple1)...
@@ -25,20 +24,21 @@ def calculateMatches(split_imgs):
     avg_corr_dict = dict()
     tile_type_dict = dict()
     max_size_dict = dict()
+    sum_dict = dict()
 
     tileCount = 1
     threshold = 0.004
     occurences = []
 
     for tile in split_imgs:
-        icecreamSumCorr, appleSumCorr, carrotSumCorr, keySumCorr, towerSumCorr, pantsSumCorr, bookSumCorr, airplaneSumCorr, anvilSumCorr, bananaSumCorr = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        bearSumCorr, beeSumCorr, birdSumCorr, catSumCorr, cowSumCorr, crocodileSumCorr, dogSumCorr, elephantSumCorr, giraffeeSumCorr, horseSumCorr = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         avg_corr_dict.clear()
+        sum_dict.clear()
 
         # init max size dict for all samples
-        max_size_dict.update({"icecream": max_range})
-        max_size_dict.update({"apple": max_range})
-        max_size_dict.update({"airplane": max_range})
-        max_size_dict.update({"anvil": max_range})
+        for value in ANIMALS:
+            max_size_dict.update({value: max_range})
+            sum_dict.update({value: 0})
 
         for type in img_dict:
             # reset discard correlation
@@ -53,40 +53,17 @@ def calculateMatches(split_imgs):
             if(max_val <= threshold):
                 discard_correlation = True
 
-            if(type == "icecream"):
-                if(discard_correlation):
-                    old_max = max_size_dict.get("icecream")
-                    max_size_dict.update({"icecream": old_max - 1})
-                else:
-                    icecreamSumCorr += max_val
-            elif(type == "apple"):
-                if(discard_correlation):
-                    old_max = max_size_dict.get("apple")
-                    max_size_dict.update({"apple": old_max - 1})
-                else:
-                    appleSumCorr += max_val
-            elif(type == "airplane"):
-                if(discard_correlation):
-                    old_max = max_size_dict.get("airplane")
-                    max_size_dict.update({"airplane": old_max - 1})
-                else:
-                    airplaneSumCorr += max_val
-            elif(type == "anvil"):
-                if(discard_correlation):
-                    old_max = max_size_dict.get("anvil")
-                    max_size_dict.update({"anvil": old_max - 1})
-                else:
-                    anvilSumCorr += max_val
+            if(discard_correlation):
+                old_max = max_size_dict.get(type)
+                max_size_dict.update({type: old_max - 1})
+            else:
+                newSum = max_val + sum_dict.get(type)
+                sum_dict.update({type: newSum})
 
-        # calculate average correlation
-        avg_corr_dict.update(
-            {"icecream": icecreamSumCorr/max_size_dict.get("icecream")})
-        avg_corr_dict.update(
-            {"apple": appleSumCorr/max_size_dict.get("apple")})
-        avg_corr_dict.update(
-            {"airplane": airplaneSumCorr/max_size_dict.get("airplane")})
-        avg_corr_dict.update(
-            {"anvil": anvilSumCorr/max_size_dict.get("anvil")})
+        for value in ANIMALS:
+            sumVal = sum_dict.get(value)
+            maxSizeVal = max_size_dict.get(value)
+            avg_corr_dict.update({value : sumVal/maxSizeVal})
 
         # print the average corrlation values for each class on this tile
         print("\n " + str(avg_corr_dict))
@@ -105,11 +82,7 @@ def calculateMatches(split_imgs):
         tileCount += 1
 
     print("\n" + str(tile_type_dict))
-
-    print("\n We think you drew a ..." + str(di(tile_type_dict)))
     return tile_type_dict, occurences
-
-#SAMPLES = {0: "bear", 1: "bee", 2: "apple", 3: "icecream"}
 
 def Conv_Recognize(img):
     conv = load_model("./models/conv_79.h5")
@@ -130,8 +103,6 @@ def Conv_Recognize(img):
     # normalize the values between -1 and 1
     x = normalize(x)
     val = conv.predict(np.array([x]))
-    #pred = SAMPLES[np.argmax(val)]
-    #print (pred)
 
     return (list(val[0]))
 
@@ -237,22 +208,10 @@ def getImages():
     # loop through all the class and save the key value pair into the dictionary
     imgs = dict()
 
-    for i in range(max_range):
-        tempImg = cv2.imread(
-            "samples/icecream/png/icecream" + str(i) + ".png", 0)
-        imgs.update({"icecream": tempImg})
-
-    for i in range(max_range):
-        tempImg = cv2.imread("samples/apple/png/apple" + str(i) + ".png", 0)
-        imgs.update({"apple": tempImg})
-
-    for i in range(max_range):
-        tempImg = cv2.imread("samples/anvil/png/anvil" + str(i) + ".png", 0)
-        imgs.update({"anvil": tempImg})
-
-    for i in range(max_range):
-        tempImg = cv2.imread(
-            "samples/airplane/png/airplane" + str(i) + ".png", 0)
-        imgs.update({"airplane": tempImg})
+    #for each animal, loop through each animal image
+    for value in ANIMALS:
+        for i in range(max_range):
+            tempImg = cv2.imread("samples/" + value + "/png/" + value + str(i) + ".png", 0)
+            imgs.update({value: tempImg})
 
     return imgs
