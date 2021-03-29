@@ -6,7 +6,7 @@ from collections import Counter
 from flask import jsonify, json
 from recognize import *
 
-app = Flask(__name__,static_folder='frontend/build',static_url_path='')
+app = Flask(__name__,static_folder='./frontend/build',static_url_path='/')
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -20,8 +20,8 @@ content_type = 'image/jpeg'
 headers = {'content-type': content_type}
 
 @app.route('/')
-def serve():
-    return send_from_directory(app.static_folder, 'index.html')
+def index():
+    return app.send_static_file('./frontend/public/index.html')
 
 @app.route("/api/doodle/", methods=["POST"])
 @cross_origin()
