@@ -11,7 +11,7 @@ from tensorflow.keras.models import load_model
 import json
 
 max_range = 99
-gridSize = 1
+gridSize = 2
 ANIMALS = ["bear", "bee", "bird", "cat", "cow",
            "crocodile", "dog", "elephant", "giraffee", "horse"]
 

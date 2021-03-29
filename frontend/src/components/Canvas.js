@@ -4,11 +4,22 @@ import {
   FormHelperText,
   NativeSelect,
   FormControl,
+  Backdrop,
+  CircularProgress,
+  Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useCanvas } from "./CanvasContext";
 import axios from "axios";
 import Graph from "./Graph";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+}));
 
 export function Canvas() {
   const {
@@ -20,6 +31,9 @@ export function Canvas() {
     draw,
     clearCanvas,
   } = useCanvas();
+
+  const classes = useStyles();
+  const [loader, setLoader] = React.useState(false);
 
   const [graphData, setGraphData] = useState([]);
   const [algorithm, setAlgorithm] = useState("1");
@@ -80,16 +94,18 @@ export function Canvas() {
             count: myObject[9],
           },
         ];
-        console.log(obj);
         setGraphData(obj);
+        setLoader(false);
       })
       .catch((error) => {
+        setLoader(false);
         console.log(error);
       });
   };
 
   const recognizeClick = () => {
     var imgData = saveCanvas();
+    setLoader(true);
     request(imgData, algorithm);
   };
 
@@ -104,6 +120,15 @@ export function Canvas() {
 
   return (
     <div>
+      <Backdrop className={classes.backdrop} open={loader}>
+        <div>
+          <CircularProgress style={{ color: "#3298dc" }} />
+          <Typography style={{ color: "#000000" }} variant="subtitle1">
+            Processing
+          </Typography>
+        </div>
+      </Backdrop>
+
       <FormControl style={{ marginTop: "5vh" }}>
         <NativeSelect value={algorithm} onChange={handleChange}>
           <option value={1}>OpenCV Patched-Base Template Matching</option>
