@@ -6,7 +6,7 @@ from collections import Counter
 from flask import jsonify, json
 from recognize import *
 
-app = Flask(name,static_folder='frontend/build',static_url_path='')
+app = Flask(__name__,static_folder='frontend/build',static_url_path='')
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -53,5 +53,5 @@ def doodle():
     else:
         return json.dumps(str(Conv_Recognize(crop)))
 
-if name == 'main':
+if __name__ == 'main':
     app.run(host='0.0.0.0')
