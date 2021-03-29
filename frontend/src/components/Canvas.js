@@ -1,8 +1,17 @@
-import { Button, Grid } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  Switch,
+  FormHelperText,
+  NativeSelect,
+  InputLabel,
+  FormControl,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useCanvas } from "./CanvasContext";
 import axios from "axios";
 import Graph from "./Graph";
+import { withStyles } from "@material-ui/core/styles";
 
 export function Canvas() {
   const {
@@ -16,6 +25,7 @@ export function Canvas() {
   } = useCanvas();
 
   const [graphData, setGraphData] = useState([]);
+  const [algorithm, setAlgorithm] = useState(1);
 
   useEffect(() => {
     prepareCanvas();
@@ -58,6 +68,7 @@ export function Canvas() {
 
   const recognizeClick = () => {
     var imgData = saveCanvas();
+    console.log("using algorithm: " + algorithm);
     request(imgData);
   };
 
@@ -66,12 +77,23 @@ export function Canvas() {
     clearCanvas();
   };
 
+  const handleChange = (event) => {
+    setAlgorithm(event.target.value);
+  };
+
   return (
     <div>
+      <FormControl style={{ marginTop: "5vh" }}>
+        <NativeSelect value={algorithm} onChange={handleChange}>
+          <option value={1}>OpenCV Patched-base template Matching</option>
+          <option value={2}>Neural Network Convolution</option>
+        </NativeSelect>
+        <FormHelperText>Select Doodle Recognition Algorithm</FormHelperText>
+      </FormControl>
       <Grid
         container
         justify="center"
-        style={{ flexGrow: 1, marginTop: "10vh" }}
+        style={{ flexGrow: 1, marginTop: "5vh" }}
         spacing={0}
       >
         <Grid item>
