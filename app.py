@@ -20,11 +20,9 @@ content_type = 'image/jpeg'
 headers = {'content-type': content_type}
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
+@app.errorhandler(404)
+def page_not_found(e):
     return app.send_static_file('index.html')
-
 
 @app.route('/')
 def index():
@@ -38,20 +36,17 @@ def doodle():
 
     img_uri = response['imgBase64']
     algorithm = response['algorithm']
-    print(algorithm)
 
     img = readb64(img_uri)
     crop = cropImg(img)
 
     if(algorithm == "1"):
-        print("opencv")
         similarity_vals = []
         split_imgs = splitImg(crop, gridSize)
         tile_types, occurences = calculateMatches(split_imgs)
         occ_list = Counter(occurences)
-        print(dict(occ_list))
+
         for i in sorted(occ_list.keys()):
-            # print(i + " : " + str(occ_list.get(i)))
             similarity_vals.append(occ_list.get(i))
 
         # clear data folders
@@ -64,7 +59,7 @@ def doodle():
 
     else:
         res = str(Conv_Recognize(crop))
-        print('OpenCV Response: ' + res)
+        print('Neural Network Response: ' + res)
         return json.dumps(res)
 
 
