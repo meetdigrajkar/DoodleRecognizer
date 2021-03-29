@@ -6,7 +6,8 @@ from collections import Counter
 from flask import jsonify, json
 from recognize import *
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask(name,static_folder='frontend/build',static_url_path='')
+
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -14,16 +15,13 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 SESSION_TYPE = 'filesystem'
 app.config.from_object(__name__)
 
-addr = 'http://localhost:3000'
-doodle_url = addr + '/api/doodle'
-
 # prepare headers for http request
 content_type = 'image/jpeg'
 headers = {'content-type': content_type}
 
-@app.route("/", methods=["GET"])
-def home():
-    return jsonify({"response" : "Doodle Recognizer - Flask Home Page"})
+@app.route('/')
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route("/api/doodle/", methods=["POST"])
 @cross_origin()
@@ -54,3 +52,6 @@ def doodle():
         return json.dumps(str(similarity_vals))
     else:
         return json.dumps(str(Conv_Recognize(crop)))
+
+if name == 'main':
+    app.run(host='0.0.0.0')

@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.14a7bfcb.chunk.css",
+    "main.js": "/static/js/main.e7494f53.chunk.js",
+    "main.js.map": "/static/js/main.e7494f53.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e6da9476.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e6da9476.js.map",
+    "static/js/2.5bb10c04.chunk.js": "/static/js/2.5bb10c04.chunk.js",
+    "static/js/2.5bb10c04.chunk.js.map": "/static/js/2.5bb10c04.chunk.js.map",
+    "static/js/3.29f0e43d.chunk.js": "/static/js/3.29f0e43d.chunk.js",
+    "static/js/3.29f0e43d.chunk.js.map": "/static/js/3.29f0e43d.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.14a7bfcb.chunk.css.map": "/static/css/main.14a7bfcb.chunk.css.map",
+    "static/js/2.5bb10c04.chunk.js.LICENSE.txt": "/static/js/2.5bb10c04.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/wearedimdam.regular.3f6a743d.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e6da9476.js",
+    "static/js/2.5bb10c04.chunk.js",
+    "static/css/main.14a7bfcb.chunk.css",
+    "static/js/main.e7494f53.chunk.js"
+  ]
+}
