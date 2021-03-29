@@ -6,7 +6,6 @@ from collections import Counter
 from flask import jsonify, json
 from recognize import *
 
-
 app = Flask(__name__, static_url_path='/static')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -22,28 +21,9 @@ doodle_url = addr + '/api/doodle'
 content_type = 'image/jpeg'
 headers = {'content-type': content_type}
 
-
-@app.route("/")
+@app.route("/", methods=["GET"])
 def home():
-    return render_template('home.html')
-
-
-@app.route("/about/")
-def about():
-    return render_template('about.html')
-
-
-@app.route("/draw/", methods=["GET"])
-def draw():
-    doodle_type = random.choice(doodle_types)
-    session["doodle_type"] = doodle_type
-
-    # clear data folders
-    clearFolder("./save")
-    clearFolder("./doodles")
-
-    return render_template('play.html', doodle_type=doodle_type)
-
+    return jsonify({"response" : "Doodle Recognizer - Flask Home Page"})
 
 @app.route("/api/doodle/", methods=["POST"])
 @cross_origin()
