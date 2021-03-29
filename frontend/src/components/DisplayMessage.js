@@ -2,7 +2,18 @@ import React from "react";
 import { Typography, Grid, IconButton } from "@material-ui/core";
 import ReplayIcon from "@material-ui/icons/Replay";
 
-const categoryList = ["Apple", "Anvil", "Ice Cream", "Airplane"];
+const categoryList = [
+  "Bear",
+  "Bee",
+  "Bird",
+  "Cat",
+  "Cow",
+  "Crocodile",
+  "Dog",
+  "Elephant",
+  "Giraffe",
+  "Horse",
+];
 
 class DisplayMessage extends React.Component {
   constructor(props) {
@@ -20,7 +31,7 @@ class DisplayMessage extends React.Component {
   getRandomCategory() {
     var index;
     do {
-      index = Math.floor(Math.random() * 4);
+      index = Math.floor(Math.random() * categoryList.length);
     } while (categoryList[index] === this.state.category);
 
     this.setState({ category: categoryList[index] });

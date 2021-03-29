@@ -104,7 +104,14 @@ def Conv_Recognize(img):
     x = normalize(x)
     val = conv.predict(np.array([x]))
 
-    return (list(val[0]))
+    #return the percent values
+    values = list(val[0])
+    toReturn = []
+    for i in values:
+        print(i)
+        toReturn.append(round((i * 100),2))
+
+    return toReturn
 
 
 def readb64(uri):

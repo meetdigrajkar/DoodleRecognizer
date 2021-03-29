@@ -52,7 +52,6 @@ def doodle():
     clearFolder("./save")
     clearFolder("./doodles")
 
-    similarity_vals = []
     response = request.get_json()
 
     img_uri = response['imgBase64']
@@ -62,17 +61,16 @@ def doodle():
     img = readb64(img_uri)
     crop = cropImg(img)
 
-    if(algorithm == 1):
+    if(algorithm == "1"):
+        print("opencv")
+        similarity_vals = []
         split_imgs = splitImg(crop, gridSize)
         tile_types, occurences = calculateMatches(split_imgs)
         occ_list = Counter(occurences)
         #print(dict(occ_list))
-
         for i in sorted (occ_list.keys()) :
             #print(i + " : " + str(occ_list.get(i)))
             similarity_vals.append(occ_list.get(i))
+        return json.dumps(str(similarity_vals))
     else:
-        similarity_vals = Conv_Recognize(crop)
-
-    print(similarity_vals)
-    return json.dumps(str(similarity_vals))
+        return json.dumps(str(Conv_Recognize(crop)))

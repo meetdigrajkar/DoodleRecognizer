@@ -11,7 +11,19 @@ import {
   Cell,
 } from "recharts";
 
-const colors = ["#33FFBD", "#AD33FF", "#FF5733", "#33E0FF"];
+//const colors = ["#33FFBD", "#AD33FF", "#FF5733", "#33E0FF"];
+const colors = [
+  "#E74C3C",
+  "#8E44AD",
+  "#3498DB",
+  "#16A085",
+  "#2ECC71",
+  "#F39C12",
+  "#D35400",
+  "#BDC3C7",
+  "#7F8C8D",
+  "#2C3E50",
+];
 const data = [
   {
     name: "Bear",
@@ -46,7 +58,7 @@ const data = [
     count: 0,
   },
   {
-    name: "Giraffee",
+    name: "Giraffe",
     count: 0,
   },
   {
@@ -68,7 +80,7 @@ class Graph extends React.Component {
     return (
       <div>
         <BarChart
-          width={window.innerWidth * 0.35}
+          width={window.innerWidth * 0.4}
           height={window.innerHeight * 0.54}
           data={this.props.data.length === 0 ? data : this.props.data}
         >
