@@ -6,7 +6,7 @@
   color: #4a4a4a;
   display: block;
   padding: 1.25rem;
-  background-color: #242424 !important;
+  background-color: #5fb0ad !important;
 }
 
 /* body {
@@ -44,13 +44,13 @@ textarea {
 }
 
 .has-text-danger {
-  color: #f14668 !important;
+  color: #1d00a1 !important;
 }
 
 .has-text-primary-light {
-  color: #ebfffc !important;
+  color: #132716 !important;
 }
 
 .has-text-warning {
-  color: #ffdd57 !important;
+  color: #7d007d !important;
 }

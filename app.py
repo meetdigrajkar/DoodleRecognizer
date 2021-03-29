@@ -20,8 +20,9 @@ content_type = 'image/jpeg'
 headers = {'content-type': content_type}
 
 
-@app.errorhandler(404)
-def not_found(e):
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
     return app.send_static_file('index.html')
 
 
@@ -50,16 +51,21 @@ def doodle():
         occ_list = Counter(occurences)
         print(dict(occ_list))
         for i in sorted(occ_list.keys()):
-            #print(i + " : " + str(occ_list.get(i)))
+            # print(i + " : " + str(occ_list.get(i)))
             similarity_vals.append(occ_list.get(i))
 
         # clear data folders
         clearFolder("./save")
         clearFolder("./doodles")
 
-        return json.dumps(str(similarity_vals))
+        res = str(similarity_vals)
+        print('OpenCV Response: ' + res)
+        return json.dumps(res)
+
     else:
-        return json.dumps(str(Conv_Recognize(crop)))
+        res = str(Conv_Recognize(crop))
+        print('OpenCV Response: ' + res)
+        return json.dumps(res)
 
 
 if __name__ == 'main':

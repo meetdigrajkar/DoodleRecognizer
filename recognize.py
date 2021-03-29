@@ -12,7 +12,9 @@ import json
 
 max_range = 99
 gridSize = 1
-ANIMALS = ["bear", "bee", "bird", "cat", "cow","crocodile","dog","elephant","giraffee","horse"]
+ANIMALS = ["bear", "bee", "bird", "cat", "cow",
+           "crocodile", "dog", "elephant", "giraffee", "horse"]
+
 
 def calculateMatches(split_imgs):
     # get all the samples in all the classes in a hash map ("apple", apple1)...
@@ -63,10 +65,10 @@ def calculateMatches(split_imgs):
         for value in ANIMALS:
             sumVal = sum_dict.get(value)
             maxSizeVal = max_size_dict.get(value)
-            avg_corr_dict.update({value : sumVal/maxSizeVal})
+            avg_corr_dict.update({value: sumVal/maxSizeVal})
 
         # print the average corrlation values for each class on this tile
-        print("\n " + str(avg_corr_dict))
+        # print("\n " + str(avg_corr_dict))
 
         # caluclate the max avg corrlation among classes
         max_value = max(avg_corr_dict.values())
@@ -75,8 +77,8 @@ def calculateMatches(split_imgs):
         for i in max_keys:
             occurences.append(i)
 
-        #print("Tile # " + str(tileCount) + " is identified as" +
-             # str(max_keys) + " with a average corrlation value: " + str(max_value))
+        # print("Tile # " + str(tileCount) + " is identified as" +
+            # str(max_keys) + " with a average corrlation value: " + str(max_value))
         tile_type_dict.update({tileCount: max_keys})
 
         tileCount += 1
@@ -84,14 +86,15 @@ def calculateMatches(split_imgs):
     final_dict = dict()
 
     for value in ANIMALS:
-        final_dict.update({value:0})
+        final_dict.update({value: 0})
 
     for st in occurences:
         cnt = final_dict.get(st)
         cnt += 1
-        final_dict.update({st:cnt})
+        final_dict.update({st: cnt})
 
     return tile_type_dict, final_dict
+
 
 def Conv_Recognize(img):
     conv = load_model("./models/conv_79.h5")
@@ -113,12 +116,11 @@ def Conv_Recognize(img):
     x = normalize(x)
     val = conv.predict(np.array([x]))
 
-    #return the percent values
+    # return the percent values
     values = list(val[0])
     toReturn = []
     for i in values:
-        print(i)
-        toReturn.append(round((i * 100),2))
+        toReturn.append(round((i * 100), 2))
 
     return toReturn
 
@@ -224,10 +226,11 @@ def getImages():
     # loop through all the class and save the key value pair into the dictionary
     imgs = dict()
 
-    #for each animal, loop through each animal image
+    # for each animal, loop through each animal image
     for value in ANIMALS:
         for i in range(max_range):
-            tempImg = cv2.imread("samples/" + value + "/png/" + value + str(i) + ".png", 0)
+            tempImg = cv2.imread("samples/" + value +
+                                 "/png/" + value + str(i) + ".png", 0)
             imgs.update({value: tempImg})
 
     return imgs
