@@ -7,5 +7,11 @@ env
 # Ingore flask session files
 .flask_session
 
-# Ignore __pycache__
-__pycache__
+# Ignore all files in __pycache__
+__pycache__/
+
+# Ignore all files in save
+save/
+
+# Ignore all files in doodles
+doodles/
