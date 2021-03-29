@@ -11,7 +11,7 @@ from tensorflow.keras.models import load_model
 import json
 
 max_range = 99
-gridSize = 6
+gridSize = 1
 ANIMALS = ["bear", "bee", "bird", "cat", "cow","crocodile","dog","elephant","giraffee","horse"]
 
 def calculateMatches(split_imgs):
@@ -31,7 +31,6 @@ def calculateMatches(split_imgs):
     occurences = []
 
     for tile in split_imgs:
-        bearSumCorr, beeSumCorr, birdSumCorr, catSumCorr, cowSumCorr, crocodileSumCorr, dogSumCorr, elephantSumCorr, giraffeeSumCorr, horseSumCorr = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         avg_corr_dict.clear()
         sum_dict.clear()
 
@@ -39,6 +38,7 @@ def calculateMatches(split_imgs):
         for value in ANIMALS:
             max_size_dict.update({value: max_range})
             sum_dict.update({value: 0})
+            avg_corr_dict.update({value: 0})
 
         for type in img_dict:
             # reset discard correlation
@@ -75,14 +75,23 @@ def calculateMatches(split_imgs):
         for i in max_keys:
             occurences.append(i)
 
-        print("Tile # " + str(tileCount) + " is identified as" +
-              str(max_keys) + " with a average corrlation value: " + str(max_value))
+        #print("Tile # " + str(tileCount) + " is identified as" +
+             # str(max_keys) + " with a average corrlation value: " + str(max_value))
         tile_type_dict.update({tileCount: max_keys})
 
         tileCount += 1
 
-    print("\n" + str(tile_type_dict))
-    return tile_type_dict, occurences
+    final_dict = dict()
+
+    for value in ANIMALS:
+        final_dict.update({value:0})
+
+    for st in occurences:
+        cnt = final_dict.get(st)
+        cnt += 1
+        final_dict.update({st:cnt})
+
+    return tile_type_dict, final_dict
 
 def Conv_Recognize(img):
     conv = load_model("./models/conv_79.h5")

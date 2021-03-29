@@ -21,7 +21,7 @@ headers = {'content-type': content_type}
 
 @app.route('/')
 def index():
-    return app.send_static_file('./frontend/public/index.html')
+    return app.send_static_file('index.html')
 
 @app.route("/api/doodle/", methods=["POST"])
 @cross_origin()
@@ -45,7 +45,7 @@ def doodle():
         split_imgs = splitImg(crop, gridSize)
         tile_types, occurences = calculateMatches(split_imgs)
         occ_list = Counter(occurences)
-        #print(dict(occ_list))
+        print(dict(occ_list))
         for i in sorted (occ_list.keys()) :
             #print(i + " : " + str(occ_list.get(i)))
             similarity_vals.append(occ_list.get(i))
