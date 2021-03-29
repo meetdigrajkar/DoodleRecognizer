@@ -28,22 +28,24 @@ export function Canvas() {
     axios
       .post("http://localhost:5000/api/doodle/", obj)
       .then((res) => {
+        var myObject = JSON.parse(res.data);
+        console.log(myObject);
         obj = [
           {
             name: "Airplane",
-            count: res.data.airplane,
+            count: myObject[0],
           },
           {
             name: "Anvil",
-            count: res.data.anvil,
+            count: myObject[1],
           },
           {
             name: "Apple",
-            count: res.data.apple,
+            count: myObject[2],
           },
           {
             name: "Ice Cream",
-            count: res.data.icecream,
+            count: myObject[3],
           },
         ];
         console.log(obj);

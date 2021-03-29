@@ -5,6 +5,10 @@ import os
 import shutil
 from collections import Counter
 from itertools import chain
+from prepare_data import normalize
+from scipy.misc import imsave, imread, imresize
+from keras.models import load_model
+import json
 
 doodle_types = ["Apple", "Airplane", "Anvil", "Icecream"]
 max_range = 99
@@ -104,6 +108,33 @@ def calculateMatches(split_imgs):
 
     print("\n We think you drew a ..." + str(di(tile_type_dict)))
     return tile_type_dict, occurences
+
+SAMPLES = {0: "airplane", 1: "anvil", 2: "apple", 3: "icecream"}
+
+def Conv_Recognize(img):
+    conv = load_model("./models/conv_97.h5")
+
+    # resize input image to 28x28
+    x = imresize(img, (28, 28))
+
+    x = np.expand_dims(x, axis=0)
+    x = np.reshape(x, (28, 28, 1))
+    # invert the colors
+    x = np.invert(x)
+    # brighten the image by 60%
+    for i in range(len(x)):
+        for j in range(len(x)):
+            if x[i][j] > 50:
+                x[i][j] = min(255, x[i][j] + x[i][j] * 0.60)
+
+    # normalize the values between -1 and 1
+    x = normalize(x)
+    val = conv.predict(np.array([x]))
+    pred = SAMPLES[np.argmax(val)]
+    classes = ["Airplane", "Anvil", "Apple", "Icecream"]
+    print (pred)
+
+    return (list(val[0]))
 
 
 def readb64(uri):

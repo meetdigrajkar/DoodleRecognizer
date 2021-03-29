@@ -62,11 +62,13 @@ def doodle():
     img = readb64(img_uri)
 
     # calculate matches based on doodle type
+
     crop = cropImg(img)
-    split_imgs = splitImg(crop, gridSize)
-    tile_types, occurences = calculateMatches(split_imgs)
+    #split_imgs = splitImg(crop, gridSize)
+    #tile_types, occurences = calculateMatches(split_imgs)
+    #occ_list = Counter(occurences)
+    #print(occ_list)
 
-    occ_list = Counter(occurences)
-    print(occ_list)
-
-    return occ_list
+    similarity_vals = Conv_Recognize(crop)
+    print(similarity_vals)
+    return json.dumps(str(similarity_vals))
