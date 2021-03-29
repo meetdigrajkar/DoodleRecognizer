@@ -14,19 +14,43 @@ import {
 const colors = ["#33FFBD", "#AD33FF", "#FF5733", "#33E0FF"];
 const data = [
   {
-    name: "Airplane",
+    name: "Bear",
     count: 0,
   },
   {
-    name: "Anvil",
+    name: "Bee",
     count: 0,
   },
   {
-    name: "Apple",
+    name: "Bird",
     count: 0,
   },
   {
-    name: "Ice Cream",
+    name: "Cat",
+    count: 0,
+  },
+  {
+    name: "Cow",
+    count: 0,
+  },
+  {
+    name: "Crocodile",
+    count: 0,
+  },
+  {
+    name: "Dog",
+    count: 0,
+  },
+  {
+    name: "Elephant",
+    count: 0,
+  },
+  {
+    name: "Giraffee",
+    count: 0,
+  },
+  {
+    name: "Horse",
     count: 0,
   },
 ];

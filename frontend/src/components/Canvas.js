@@ -43,20 +43,44 @@ export function Canvas() {
         console.log(myObject);
         obj = [
           {
-            name: "Airplane",
+            name: "Bear",
             count: myObject[0],
           },
           {
-            name: "Anvil",
+            name: "Bee",
             count: myObject[1],
           },
           {
-            name: "Apple",
+            name: "Bird",
             count: myObject[2],
           },
           {
-            name: "Ice Cream",
+            name: "Cat",
             count: myObject[3],
+          },
+          {
+            name: "Cow",
+            count: myObject[4],
+          },
+          {
+            name: "Crocodile",
+            count: myObject[5],
+          },
+          {
+            name: "Dog",
+            count: myObject[6],
+          },
+          {
+            name: "Elephant",
+            count: myObject[7],
+          },
+          {
+            name: "Giraffee",
+            count: myObject[8],
+          },
+          {
+            name: "Horse",
+            count: myObject[9],
           },
         ];
         console.log(obj);
