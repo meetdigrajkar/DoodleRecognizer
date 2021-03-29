@@ -65,6 +65,8 @@ def doodle():
     # calculate matches based on doodle type
     crop = cropImg(img)
 
+    print("gitkraken is op as hell")
+
     #based on the algorithm type (1 : opencv, 2: neural network convolution)
     if(algorithm == 1):
         split_imgs = splitImg(crop, gridSize)

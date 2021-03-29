@@ -6,7 +6,7 @@ import shutil
 from collections import Counter
 from itertools import chain
 from prepare_data import normalize
-from scipy.misc import imsave, imread, imresize
+from scipy.misc import imresize
 from keras.models import load_model
 import json
 
@@ -109,7 +109,7 @@ def calculateMatches(split_imgs):
     print("\n We think you drew a ..." + str(di(tile_type_dict)))
     return tile_type_dict, occurences
 
-SAMPLES = {0: "airplane", 1: "anvil", 2: "apple", 3: "icecream"}
+#SAMPLES = {0: "bear", 1: "bee", 2: "apple", 3: "icecream"}
 
 def Conv_Recognize(img):
     conv = load_model("./models/conv_79.h5")
@@ -130,9 +130,8 @@ def Conv_Recognize(img):
     # normalize the values between -1 and 1
     x = normalize(x)
     val = conv.predict(np.array([x]))
-    pred = SAMPLES[np.argmax(val)]
-    classes = ["Airplane", "Anvil", "Apple", "Icecream"]
-    print (pred)
+    #pred = SAMPLES[np.argmax(val)]
+    #print (pred)
 
     return (list(val[0]))
 
