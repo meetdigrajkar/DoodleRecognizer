@@ -34,7 +34,7 @@ export function Canvas() {
       algorithm: algorithm,
     };
     axios
-      .post("https://doodlerecognizer.herokuapp.com/home/api/doodle/", obj)
+      .post("https://doodlerecognizer.herokuapp.com/api/doodle/", obj)
       .then((res) => {
         var myObject = JSON.parse(res.data);
         console.log(myObject);
