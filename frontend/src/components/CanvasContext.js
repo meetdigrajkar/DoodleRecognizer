@@ -12,7 +12,10 @@ export const CanvasProvider = ({ children }) => {
     canvas.height = window.innerHeight;
     canvas.style.width = `${window.innerWidth * 0.35}px`;
     canvas.style.height = `${window.innerHeight * 0.5}px`;
-    canvas.style.border = "1px solid #000";
+    // canvas.style.border = "1px solid #000";
+    canvas.style.borderRadius = "16px";
+    canvas.style.boxShadow =
+      "rgb(145 158 171 / 24%) 0px 0px 2px 0px, rgb(145 158 171 / 24%) 0px 16px 32px -4px";
 
     const context = canvas.getContext("2d");
     context.scale(2, 2);

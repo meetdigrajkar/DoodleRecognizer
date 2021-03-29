@@ -31,9 +31,10 @@ export function Canvas() {
     prepareCanvas();
   }, []);
 
-  const request = (imgData) => {
+  const request = (imgData, algorithm) => {
     var obj = {
       imgBase64: imgData,
+      algorithm: algorithm,
     };
     axios
       .post("http://localhost:5000/api/doodle/", obj)
@@ -68,8 +69,7 @@ export function Canvas() {
 
   const recognizeClick = () => {
     var imgData = saveCanvas();
-    console.log("using algorithm: " + algorithm);
-    request(imgData);
+    request(imgData, algorithm);
   };
 
   const clearCanvasClick = () => {
@@ -85,7 +85,7 @@ export function Canvas() {
     <div>
       <FormControl style={{ marginTop: "5vh" }}>
         <NativeSelect value={algorithm} onChange={handleChange}>
-          <option value={1}>OpenCV Patched-base template Matching</option>
+          <option value={1}>OpenCV Patched-Base Template Matching</option>
           <option value={2}>Neural Network Convolution</option>
         </NativeSelect>
         <FormHelperText>Select Doodle Recognition Algorithm</FormHelperText>
